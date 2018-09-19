@@ -139,7 +139,7 @@ def open():
     text2 = font1.render("Press Space Button to Start", False, (255,255,255))
 
     while endFlag == False:
-        screen.fill(0,0,0)
+        screen.fill((0,0,0))
         screen.blit(text1,(60,50))
         screen.blit(text1,(60,150))
         for event in pygame.event.get():
