@@ -131,6 +131,24 @@ class Shooting_Star(Rope):
         else:
             return False
 
+def open():
+    endFlag = False
+    font1 = pygame.font.SysFont(None, 80)
+    text1 = font1.render("Jum the Rope", False, (255,255,255))
+    font2 = pygame.font.SysFont(None, 50)
+    text2 = font1.render("Press Space Button to Start", False, (255,255,255))
+
+    while endFlag == False:
+        screen.fill(0,0,0)
+        screen.blit(text1,(60,50))
+        screen.blit(text1,(60,150))
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:  
+                endFlag = True
+            else:
+                endFlag = True
+                main()
+
 def main():
     endFlag = False
     octo_cat = Octo_Cat(400,400)
@@ -228,4 +246,4 @@ def quit(score):
     pygame.quit()
 
 if __name__ == "__main__":
-    main()
+    open()
