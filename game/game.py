@@ -154,6 +154,7 @@ def main():
     endFlag = False
     octo_cat = Octo_Cat(400,400)
     time_elapsed = 0
+    force_quit = False
 
     ropes = []
 
@@ -165,6 +166,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  
                 endFlag = True
+                force_quit = True
             else:
                 octo_cat.update(event)
 
@@ -233,28 +235,29 @@ def main():
         for i in range(octo_cat.life - 1):
             screen.blit(heart_image,(i * 30,50))
         pygame.display.update()
-    quit(time_elapsed) 
+    quit(time_elapsed,force_quit) 
 
 #when quitting the game
-def quit(score):
-    endFlag = False
-    yourScore = "your score: " + str(score)
-    font1 = pygame.font.SysFont(None, 40)
-    text1 = font1.render(yourScore, False, (255,255,255))
-    font2 = pygame.font.SysFont(None, 40)
-    text2 = font1.render("Press Any Key to Re-Start", False, (255,255,255))
+def quit(score,force_quit):
+    if force_quit == False:
+        endFlag = False
+        yourScore = "your score: " + str(score)
+        font1 = pygame.font.SysFont(None, 40)
+        text1 = font1.render(yourScore, False, (255,255,255))
+        font2 = pygame.font.SysFont(None, 40)
+        text2 = font1.render("Press Any Key to Re-Start", False, (255,255,255))
 
-    while endFlag == False:
-        screen.fill((0,0,0))
-        screen.blit(text1,(20,50))
-        screen.blit(text2,(20,150))
-        pygame.display.update()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:  
-                endFlag = True
-            elif event.type == pygame.KEYDOWN:
-                endFlag = True
-                main()
+        while endFlag == False:
+            screen.fill((0,0,0))
+            screen.blit(text1,(20,50))
+            screen.blit(text2,(20,150))
+            pygame.display.update()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:  
+                    endFlag = True
+                elif event.type == pygame.KEYDOWN:
+                    endFlag = True
+                    main()
     #retrieve the highest score
     data = np.loadtxt("score/score.tsv",dtype="str",delimiter=",")
     highest_score = data[1]
@@ -266,4 +269,3 @@ def quit(score):
 
 if __name__ == "__main__":
     open()
-xdd
