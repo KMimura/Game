@@ -134,18 +134,19 @@ class Shooting_Star(Rope):
 def open():
     endFlag = False
     font1 = pygame.font.SysFont(None, 80)
-    text1 = font1.render("Jum the Rope", False, (255,255,255))
-    font2 = pygame.font.SysFont(None, 50)
-    text2 = font1.render("Press Space Button to Start", False, (255,255,255))
+    text1 = font1.render("Jump the Rope", False, (255,255,255))
+    font2 = pygame.font.SysFont(None, 40)
+    text2 = font1.render("Press Any Key to Start", False, (255,255,255))
 
     while endFlag == False:
         screen.fill((0,0,0))
-        screen.blit(text1,(60,50))
-        screen.blit(text1,(60,150))
+        screen.blit(text1,(30,50))
+        screen.blit(text2,(20,150))
+        pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  
                 endFlag = True
-            else:
+            elif event.type == pygame.KEYDOWN:
                 endFlag = True
                 main()
 
@@ -157,6 +158,7 @@ def main():
     ropes = []
 
     while endFlag == False:
+        clock.tick(60) 
         time_elapsed += 1
         screen.fill((0,0,0))
 
@@ -235,9 +237,26 @@ def main():
 
 #when quitting the game
 def quit(score):
-    print("your score: " + str(score))
+    endFlag = False
+    yourScore = "your score: " + str(score)
+    font1 = pygame.font.SysFont(None, 40)
+    text1 = font1.render(yourScore, False, (255,255,255))
+    font2 = pygame.font.SysFont(None, 40)
+    text2 = font1.render("Press Any Key to Re-Start", False, (255,255,255))
+
+    while endFlag == False:
+        screen.fill((0,0,0))
+        screen.blit(text1,(20,50))
+        screen.blit(text2,(20,150))
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:  
+                endFlag = True
+            elif event.type == pygame.KEYDOWN:
+                endFlag = True
+                main()
     #retrieve the highest score
-    data = np.loadtxt("score/score.tsv",dtype="string",delimiter=",")
+    data = np.loadtxt("score/score.tsv",dtype="str",delimiter=",")
     highest_score = data[1]
     print("highest score so far: " + highest_score)
     if(score > int(highest_score)):
@@ -247,3 +266,4 @@ def quit(score):
 
 if __name__ == "__main__":
     open()
+xdd
