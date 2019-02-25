@@ -261,7 +261,7 @@ def quit(score,force_quit):
     #retrieve the highest score
     data = np.loadtxt("score/score.tsv",dtype="str",delimiter=",")
     highest_score = data[1]
-    print("highest score so far: " + highest_score)
+    print("The highest score so far: " + highest_score)
     if(score > int(highest_score)):
         save_data = np.array([str(datetime.datetime.today()),str(score)])
         np.savetxt('score/score.tsv',save_data,delimiter=',', fmt="%s")
